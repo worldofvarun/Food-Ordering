@@ -1,19 +1,23 @@
-import express, {json} from "express";
+import express from "express";
 import cors from "cors";
 import 'dotenv/config.js';
 import mongoose from "mongoose";
+import myUserRoutes from "./router/myUserRoutes.js";
 
 const app = express();
 
 app.use(express.json())
 app.use(cors({
-
+    originalUrl: process.env.FRONTEND_URL,
+    credentials: true
 }))
 
 
 app.get('/test', async (req, res) => {
     res.json({message: "Server running!"});
 })
+
+app.use('/api/my/user', myUserRoutes);
 
 
 mongoose.connect(process.env.MONGODB_URL).then(() =>  {
