@@ -2,8 +2,8 @@ import {auth} from "express-oauth2-jwt-bearer";
 import * as jwt from 'jsonwebtoken';
 import User from "../model/User.js";
 export const jwtCheck = auth({
-    audience: 'mern-food-ordering-api',
-    issuerBaseURL: 'https://dev-5i2jtfo5pedzltz8.us.auth0.com/',
+    audience: process.env.AUTH0_AUDIENCE,
+    issuerBaseURL: process.env.AUTH0_ISSUERBASEURL,
     tokenSigningAlg: 'RS256'
 });
 
