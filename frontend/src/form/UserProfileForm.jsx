@@ -1,6 +1,11 @@
 import zod from 'zod';
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+
+import {Input} from "@/components/ui/input.jsx";
+import {LoadingButton} from "@/components/LoadingButton.jsx";
+import {Button} from "@/components/ui/button.jsx";
+import {useEffect} from "react";
 import {
     Form,
     FormControl,
@@ -9,11 +14,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from "@/components/ui/form.jsx";
-import {Input} from "@/components/ui/input.jsx";
-import {LoadingButton} from "@/components/LoadingButton.jsx";
-import {Button} from "@/components/ui/button.jsx";
-import {useEffect} from "react";
+} from "../components/ui/form.jsx";
 
 const formSchema = zod.object({
     email: zod.string().optional(),

@@ -13,8 +13,8 @@ app.use(cors({
 }))
 
 
-app.get('/test', async (req, res) => {
-    res.json({message: "Server running!"});
+app.get('/health', async (req, res) => {
+    res.json({message: "health OK!"});
 })
 
 app.use('/api/my/user', myUserRoutes);
