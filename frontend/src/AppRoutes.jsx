@@ -6,8 +6,11 @@ import AuthCallback from "@/pages/AuthCallback.jsx";
 import UserProfilePage from "@/pages/UserProfilePage.jsx";
 import {Toaster} from "sonner";
 import ProtectedRoute from "@/auth/ProtectedRoute.jsx";
+import ManageRestaurantPage from "@/pages/ManageRestaurantPage.jsx";
+import {useAuth0} from "@auth0/auth0-react";
 
 export default function AppRoutes(){
+    const {isLoading} = useAuth0();
     return (
         <BrowserRouter>
             <Auth0ProviderwithNavogation>
@@ -26,6 +29,7 @@ export default function AppRoutes(){
                         {/* Protected Route */}
                         <Route Component={ProtectedRoute}>
                             <Route path="/profile" element={<UserProfilePage/>} />
+                            <Route path="/manage-restaurant" element={<ManageRestaurantPage/>} />
                         </Route>
 
                     </Route>

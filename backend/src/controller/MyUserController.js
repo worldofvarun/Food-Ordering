@@ -22,6 +22,7 @@ export const createCurrentUser = async  (req, res) => {
 
 export const updateCurrentUser = async (req, res) => {
     try {
+        console.log(req.body)
         const {name, address, city, country} = req.body;
         const user = await User.findById(req.userId);
         if(!user){

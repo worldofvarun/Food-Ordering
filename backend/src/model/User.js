@@ -9,6 +9,6 @@ const UserSchema = new mongoose.Schema({
     country: {type: String},
 })
 
-const UserModel = mongoose.model('user', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
 
 export default UserModel;
