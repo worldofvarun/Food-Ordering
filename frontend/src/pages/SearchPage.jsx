@@ -69,8 +69,11 @@ function SearchPage() {
         }))
     }
 
+    if(isLoading){
+        return <span>Loading...</span>
+    }
 
-    if (!searchResult?.data || !city && isLoading === false){
+    if (!searchResult?.data || !city){
         return <span className={'flex-1'}>no restaurant found</span>
     }
 
