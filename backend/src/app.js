@@ -5,7 +5,7 @@ import 'dotenv/config.js';
 import {v2 as cloudinary} from  'cloudinary'
 import myUserRoutes from "./router/myUserRoutes.js";
 import myRestaurantRoutes from "./router/myRestaurantRoutes.js";
-import bodyParser from "body-parser";
+import restaurantRoutes from "./router/RestaurantRoutes.js"
 
 const app = express();
 
@@ -31,9 +31,7 @@ app.get('/health', async (req, res) => {
 
 app.use('/api/my/user', myUserRoutes);
 app.use('/api/my/restaurant', myRestaurantRoutes);
-app.put('/test', (req, res) => {
-    console.log(req.body);
-})
+app.use('/api/restaurant' , restaurantRoutes);
 
 
 mongoose.connect(process.env.MONGODB_URL).then(() =>  {

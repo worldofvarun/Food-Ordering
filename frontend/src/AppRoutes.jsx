@@ -7,10 +7,9 @@ import UserProfilePage from "@/pages/UserProfilePage.jsx";
 import {Toaster} from "sonner";
 import ProtectedRoute from "@/auth/ProtectedRoute.jsx";
 import ManageRestaurantPage from "@/pages/ManageRestaurantPage.jsx";
-import {useAuth0} from "@auth0/auth0-react";
+import SearchPage from "@/pages/SearchPage.jsx";
 
 export default function AppRoutes(){
-    const {isLoading} = useAuth0();
     return (
         <BrowserRouter>
             <Auth0ProviderwithNavogation>
@@ -24,6 +23,7 @@ export default function AppRoutes(){
 
                     <Route Component={AppLayout}>
                         <Route path="/auth-callback" element={<AuthCallback/>}/>
+                        <Route path={"/search/:city"} element={<SearchPage/>}/>
                         <Route path="*" element={<Navigate to={'/'}/>}/>
 
                         {/* Protected Route */}

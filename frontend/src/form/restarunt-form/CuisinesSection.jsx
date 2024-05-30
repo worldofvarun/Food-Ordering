@@ -2,30 +2,9 @@ import React from 'react';
 import {FormDescription, FormField, FormItem, FormMessage} from "@/components/ui/form.jsx";
 import {useFormContext} from "react-hook-form";
 import CuisinesCheckBox from "@/form/restarunt-form/CuisinesCheckBox.jsx";
+import {cuisines} from "@/utils.js";
 
 function CuisinesSection() {
-    const cuisines = [
-        "Italian",
-        "Chinese",
-        "Indian",
-        "Mexican",
-        "Japanese",
-        "French",
-        "Thai",
-        "Spanish",
-        "Greek",
-        "Moroccan",
-        "Lebanese",
-        "Korean",
-        "Vietnamese",
-        "Brazilian",
-        "Turkish",
-        "Ethiopian",
-        "Russian",
-        "Peruvian",
-        "German",
-        "Caribbean"
-    ];
 
     const { control } = useFormContext()
     return (
