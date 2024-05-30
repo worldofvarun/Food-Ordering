@@ -16,7 +16,7 @@ function SearchPage() {
         sortBy: "bestMatch",
     });
     const { city } = useParams()
-    const {searchResult} = useSearchRestaurants(city, searchQueryState);
+    const {searchResult, isLoading} = useSearchRestaurants(city, searchQueryState);
     const [isExpand, setisExpand] = useState(false);
 
     function handelOnSearchSubmit(formData){
@@ -70,7 +70,7 @@ function SearchPage() {
     }
 
 
-    if (!searchResult?.data || !city){
+    if (!searchResult?.data || !city && isLoading === false){
         return <span className={'flex-1'}>no restaurant found</span>
     }
 
