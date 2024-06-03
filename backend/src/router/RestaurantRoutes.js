@@ -10,6 +10,14 @@ router.get('/search/:city',
                .trim()
                .notEmpty(),
             RestaurantController.searchRestaurant
+    );
+
+router.get('/:restaurantId',
+    param("restaurantId")
+        .isString()
+        .trim()
+        .notEmpty(),
+    RestaurantController.getRestaurant
     )
 
 

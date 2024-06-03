@@ -5,7 +5,7 @@ import {Banknote, Clock, Dot} from "lucide-react";
 
 function SearchResultCard({restaurant}) {
     return (
-        <Link to={'/'} className={'grid md:grid-cols-[2fr_3fr] gap-5 group border p-3 rounded-md shadow'}>
+        <Link to={`/details/${restaurant._id}`} className={'grid md:grid-cols-[2fr_3fr] gap-5 group border p-3 rounded-md shadow'}>
 
                 <AspectRatio ratio={16 / 6}>
                     <img

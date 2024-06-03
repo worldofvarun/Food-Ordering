@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import SearchBar from "@/components/SearchBar.jsx";
 import {useSearchRestaurants} from "@/api/RestaurantApi.js";
 import SearchResultInfo from "@/components/SearchResultInfo.jsx";
-import SearchResultCard from "@/components/ui/SearchResultCard.jsx";
+import SearchResultCard from "@/components/SearchResultCard.jsx";
 import PageSelector from "@/components/PageSelector.jsx";
 import CuisineFilter from "@/components/CuisineFilter.jsx";
 import {cuisines} from "@/utils.js";

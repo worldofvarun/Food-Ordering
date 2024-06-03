@@ -8,6 +8,7 @@ import {Toaster} from "sonner";
 import ProtectedRoute from "@/auth/ProtectedRoute.jsx";
 import ManageRestaurantPage from "@/pages/ManageRestaurantPage.jsx";
 import SearchPage from "@/pages/SearchPage.jsx";
+import DetailsPage from "@/pages/DetailsPage.jsx";
 
 export default function AppRoutes(){
     return (
@@ -24,6 +25,7 @@ export default function AppRoutes(){
                     <Route Component={AppLayout}>
                         <Route path="/auth-callback" element={<AuthCallback/>}/>
                         <Route path={"/search/:city"} element={<SearchPage/>}/>
+                        <Route path={'/details/:restaurant_id'} element={<DetailsPage/>}/>
                         <Route path="*" element={<Navigate to={'/'}/>}/>
 
                         {/* Protected Route */}

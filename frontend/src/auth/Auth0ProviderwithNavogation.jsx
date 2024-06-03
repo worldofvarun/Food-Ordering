@@ -16,8 +16,8 @@ function Auth0ProviderwithNavogation({children}){
     }
 
 
-    function onRedirectCallback(appState, user) {
-        navigate('/auth-callback')
+    function onRedirectCallback(appState) {
+        navigate(appState?.returnTo || '/auth-callback')
     }
 
     return (

@@ -11,7 +11,7 @@ export const useSearchRestaurants = (city, searchQuery) => {
         params.set('sortBy', searchQuery.sortBy)
         const response = await fetch(`${API_BASE_URL}/restaurant/search/${city}?${params.toString()}`);
         if(!response.ok) {
-            throw new Error('Restaurant not found.');
+            throw new Error('no Data found.');
         }
 
         return await response.json();
@@ -24,4 +24,24 @@ export const useSearchRestaurants = (city, searchQuery) => {
     })
 
     return {searchResult, isLoading};
+}
+
+
+export const useGetRestaurant = (restarunt_id) => {
+    const getRestaurant = async () => {
+        const resoponse = await fetch(`${API_BASE_URL}/restaurant/${restarunt_id}`);
+        if(!resoponse.ok){
+            throw  new Error('No Restaurant Found')
+        }
+
+        return await resoponse.json();
+    }
+
+    const {data: restaurantDetails, isLoading} = useQuery({
+        queryKey: ["GetRestaurantById"],
+        queryFn: getRestaurant,
+        enabled: !!restarunt_id
+    })
+
+    return {restaurantDetails, isLoading}
 }
