@@ -4,13 +4,33 @@ import {Badge} from "@/components/ui/badge.jsx";
 import {Separator} from "@/components/ui/separator.jsx";
 import {Trash} from "lucide-react";
 import CheckOutButton from "@/components/CheckOutButton.jsx";
+import {useCheckOutSessionRequest} from "@/api/OrderApi.js";
 
 function OrderSummary({restaurant, cartItems, onRemove}) {
+    const {createcheckoutsession, isPending} = useCheckOutSessionRequest()
 
     function getCount(){
         return cartItems.reduce((acc, currentValue) => {
              return acc + (currentValue.price * currentValue.quantity)
         }, 0)
+    }
+
+    async function onCheckOut(userFormData){
+
+        if(!restaurant){
+            return
+        }
+
+        const checkOutData = {
+            cartItems: cartItems,
+            restaurantId: restaurant._id,
+            deliveryDetails: userFormData,
+
+        }
+
+        const data = await createcheckoutsession(checkOutData);
+        window.location.href = data.url
+
     }
 
     return (
@@ -44,7 +64,7 @@ function OrderSummary({restaurant, cartItems, onRemove}) {
                             </span>
                          <Separator/>
                     </div>
-                    {cartItems.length > 0 && (<CheckOutButton/>)}
+                    {cartItems.length > 0 && (<CheckOutButton onCheckOut={onCheckOut}/>)}
                 </CardContent>
             </CardHeader>
         </>

@@ -6,6 +6,8 @@ import {v2 as cloudinary} from  'cloudinary'
 import myUserRoutes from "./router/myUserRoutes.js";
 import myRestaurantRoutes from "./router/myRestaurantRoutes.js";
 import restaurantRoutes from "./router/RestaurantRoutes.js"
+import orderRoutes from "./router/OrderRoutes.js";
+import {StripeWebhookHandler} from "./controller/OrderController.js";
 
 const app = express();
 
@@ -17,12 +19,14 @@ cloudinary.config({
 });
 
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     originalUrl: process.env.FRONTEND_URL,
     credentials: true
 }))
+app.use('/api/order/checkout/webhook', express.raw({ type: '*/*' }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 
 //: health check
 app.get('/health', async (req, res) => {
@@ -32,6 +36,7 @@ app.get('/health', async (req, res) => {
 app.use('/api/my/user', myUserRoutes);
 app.use('/api/my/restaurant', myRestaurantRoutes);
 app.use('/api/restaurant' , restaurantRoutes);
+app.use('/api/order', orderRoutes)
 
 
 mongoose.connect(process.env.MONGODB_URL).then(() =>  {

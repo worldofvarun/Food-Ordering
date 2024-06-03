@@ -23,7 +23,7 @@ const formSchema = zod.object({
     country: zod.string().min(1, "country is required"),
 })
 
-function UserProfileForm({onSave, isLoading, currentUser}) {
+function UserProfileForm({onSave, isLoading, currentUser, title = "User Profile", buttonTitle="submit"}) {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: currentUser
@@ -37,7 +37,7 @@ function UserProfileForm({onSave, isLoading, currentUser}) {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 bg-gray-100 rounded-lg p-10">
                 <div>
-                    <h2 className={'text-2xl font-bold'}>User Profile</h2>
+                    <h2 className={'text-2xl font-bold'}>{title}</h2>
                 </div>
 
                     <FormDescription>
@@ -114,7 +114,7 @@ function UserProfileForm({onSave, isLoading, currentUser}) {
                 {/* submit button */}
                 {isLoading ? (<LoadingButton/>) : (
                     <Button type={'submit'} className={'bg-orange-500'}>
-                        Submit
+                        {buttonTitle}
                     </Button>
                 )}
             </form>
