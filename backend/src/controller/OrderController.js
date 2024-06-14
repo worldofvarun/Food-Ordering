@@ -16,7 +16,7 @@ export const createCheckOutSession = async (req, res) => {
         }
 
         const newOrder = await  new Order({
-            restaurant: checkoutsession.restaurantIdc,
+            restaurant: checkoutsession.restaurantId,
             user: req.userId,
             cartItems: checkoutsession.cartItems.map((cartItem) => ({
                 menuItemId: cartItem._id,
@@ -54,6 +54,21 @@ export const createCheckOutSession = async (req, res) => {
     }
 }
 
+
+export const getMyOrders = async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.userId })
+            .sort({ createdAt: -1 })
+            .populate("user")
+            .populate("restaurant")
+
+
+        res.json(orders);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" });
+    }
+};
 
 
 function createLineItems(CheckOutSessionRequest, menuItems) {

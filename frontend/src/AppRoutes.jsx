@@ -9,6 +9,7 @@ import ProtectedRoute from "@/auth/ProtectedRoute.jsx";
 import ManageRestaurantPage from "@/pages/ManageRestaurantPage.jsx";
 import SearchPage from "@/pages/SearchPage.jsx";
 import DetailsPage from "@/pages/DetailsPage.jsx";
+import OrderStatusPage from "@/pages/OrderStatusPage.jsx";
 
 export default function AppRoutes(){
     return (
@@ -32,6 +33,8 @@ export default function AppRoutes(){
                         <Route Component={ProtectedRoute}>
                             <Route path="/profile" element={<UserProfilePage/>} />
                             <Route path="/manage-restaurant" element={<ManageRestaurantPage/>} />
+                            <Route path={'/order-status'} element={<OrderStatusPage/>}/>
+
                         </Route>
 
                     </Route>

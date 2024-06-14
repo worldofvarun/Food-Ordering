@@ -111,3 +111,59 @@ export const useUpdateRestaurant = () => {
 
     return {updateRestaurant, isPending}
 }
+//: get order
+export const useGetRestaurantOrders = () => {
+    const { getAccessTokenSilently } = useAuth0();
+    const getRestaurantOrders = async () => {
+        const accessToken = await getAccessTokenSilently();
+
+        const response = await fetch(`${API_BASE_URL}/my/restaurant/order`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if(!response.ok){
+            throw new Error('Something went wrong...')
+        }
+
+        return await response.json()
+    }
+
+    const {data: orders, isLoading, isError, error} = useQuery({
+        queryKey: ["fetchMyRestaurantOrders"],
+        queryFn: getRestaurantOrders,
+        retry: false,
+        refetchInterval: 5000,
+    })
+
+    return {orders, isLoading}
+}
+//: patch order
+export const useUpdateOrderStatus = () => {
+    const { getAccessTokenSilently } = useAuth0();
+    async function updateOrderStatus (orderStatus) {
+        const accessToken = await getAccessTokenSilently();
+        const response = await fetch(`${API_BASE_URL}/my/restaurant/order/${orderStatus.orderId}/status`,{
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({status: orderStatus.status})
+        })
+
+        if(!response.ok){
+            throw new Error('Something went wrong...')
+        }
+
+        return await response.json()
+
+    }
+
+    const {mutateAsync: updateStatus, isPending} = useMutation({
+        mutationFn: updateOrderStatus,
+    })
+
+    return {updateStatus, isPending};
+}

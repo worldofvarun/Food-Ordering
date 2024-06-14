@@ -37,7 +37,8 @@ router.put(
     MyRestaurantController.updateRestaurant
 );
 
+router.get('/order',  jwtCheck, jwtParse, MyRestaurantController.getOrder)
 
-
+router.patch('/order/:id/status', jwtCheck, jwtParse, MyRestaurantController.updateOrderStatus)
 
 export default router;

@@ -8,6 +8,7 @@ function MobileNavLinks() {
     return (
         <>
             <Link to={'/manage-restaurant'} className={'flex-1 font-bold hover:bg-orange-500 hover:text-white hover:bg-opacity-75 rounded py-3 px-1'}>Manage restaurant</Link>
+            <Link to={'/order-status'} className={'flex-1 font-bold hover:bg-orange-500 hover:text-white hover:bg-opacity-75 rounded py-3 px-1'}>Order Status</Link>
             <Link to={'/profile'} className={'flex-1 font-bold hover:bg-orange-500 hover:text-white hover:bg-opacity-75 rounded py-3 px-1'}>user profile</Link>
             <Button className={'flex-1 font-bold bg-orange-500'} onClick={logout}>LogOut</Button>
         </>

@@ -2,6 +2,7 @@ import Restaurant from "../model/Restaurant.js";
 import * as cloudinary from "cloudinary";
 import mongoose from "mongoose";
 import {body} from "express-validator";
+import Order from "../model/Order.js";
 
 
 export const getRestaurant = async (req, res) => {
@@ -44,7 +45,7 @@ export const createRestaurant = async (req, res)=> {
     }catch (e) {
         console.log(e)
         res.status(500).send({message: "something went wrong"})
-        
+
     }
 }
 
@@ -78,6 +79,52 @@ export const updateRestaurant = async (req, res) => {
     }catch (e) {
         console.log(e)
         res.status(500).send({message: "something went wrong"})
+    }
+}
+
+export const getOrder = async (req, res) => {
+    try {
+        const restaurant = await Restaurant.findOne({user: {_id: req.userId}});
+
+        if(!restaurant){
+            return res.status(404).json({message: "Restaurant Not Found!"})
+        }
+
+        const orders = await Order.find({restaurant: {_id: restaurant._id}})
+            .sort({ createdAt: -1 })
+            .populate('user')
+            .populate('restaurant');
+
+        res.status(200).json(orders)
+    }catch (e) {
+        console.log(e)
+        res.status(500).send({message: "Something went wrong!"})
+    }
+}
+
+export const updateOrderStatus = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const {status} = req.body;
+        const order = await Order.findById(id);
+        if(!order){
+            return res.status(404).json({message: "order not found"})
+        }
+
+        const restaurant = await Restaurant.findOne({_id: order.restaurant})
+                                                                                    .populate('user');
+        if(restaurant?.user?._id.toString() !== req.userId){
+            return res.status(401).json()
+        }
+
+        order.status = status;
+        await order.save();
+
+        res.status(200).json(order);
+
+    }catch (e) {
+        console.log(e)
+        res.status(500).json()
     }
 }
 
